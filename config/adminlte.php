@@ -288,6 +288,7 @@ return [
         //         ],
         //     ],
         // ],
+        
         [
             'text'    => 'Manage Users',
             'icon'    => 'fas fa-fw fa-user',

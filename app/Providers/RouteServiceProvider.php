@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Models\Worksite;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,30 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Config::set([
+            'adminlte.menu' => array_merge(
+                array_merge(
+                    [[
+                        'text' => 'Dashboard',
+                        'icon' => 'fas fa-fw fa-bolt',
+                        'url' => "/"
+                    ]],
+                    collect(collect(Worksite::get('circuit_number'))
+                        ->unique()
+                        ->pluck('circuit_number')
+                        ->toArray())
+                        ->map(function ($circuit) {
+                            return [
+                                'text' => $circuit,
+                                'icon' => 'fas fa-fw fa-bolt',
+                                'url' => "circuits/$circuit"
+                            ];
+                        })->toArray()
+                ),
+                Config::get('adminlte.menu')
+            ),
+        ]);
+        
         $this->configureRateLimiting();
 
         $this->routes(function () {
