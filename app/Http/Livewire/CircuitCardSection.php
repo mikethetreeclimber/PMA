@@ -34,10 +34,10 @@ class CircuitCardSection extends Component
     {
         return view('livewire.circuit-card-section', 
             compact(
-                $this->totalWorksites,
+               [ $this->totalWorksites,
                 $this->totalAuthorized,
                 $this->totalPending,
-                $this->totalRefused,
+                $this->totalRefused,]
             ));
     }
 }
