@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Worksite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -28,32 +29,31 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (Worksite::on()) {
-            Config::set([
-                'adminlte.menu' => array_merge(
-                    array_merge(
-                        [[
-                            'text' => 'Dashboard',
-                            'icon' => 'fas fa-fw fa-bolt',
-                            'url' => "/"
-                        ]],
-                        collect(collect(Worksite::get('circuit_number'))
-                            ->unique()
-                            ->pluck('circuit_number')
-                            ->toArray())
-                            ->map(function ($circuit) {
-                                return [
-                                    'text' => $circuit,
-                                    'icon' => 'fas fa-fw fa-bolt',
-                                    'url' => "circuits/$circuit"
-                                ];
-                            })->toArray()
-                    ),
-                    Config::get('adminlte.menu')
+       if (DB::connection()->getDatabaseName() === 'PMA'){
+        Config::set([
+            'adminlte.menu' => array_merge(
+                array_merge(
+                    [[
+                        'text' => 'Dashboard',
+                        'icon' => 'fas fa-fw fa-bolt',
+                        'url' => "/"
+                    ]],
+                    collect(collect(Worksite::get('circuit_number'))
+                        ->unique()
+                        ->pluck('circuit_number')
+                        ->toArray())
+                        ->map(function ($circuit) {
+                            return [
+                                'text' => $circuit,
+                                'icon' => 'fas fa-fw fa-bolt',
+                                'url' => "circuits/$circuit"
+                            ];
+                        })->toArray()
                 ),
-            ]);
-        }
-       
+                Config::get('adminlte.menu')
+            ),
+        ]);
+    }
         
         $this->configureRateLimiting();
 
