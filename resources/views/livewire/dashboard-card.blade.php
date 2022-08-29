@@ -1,7 +1,7 @@
 @if ($projectTotalWorksites > 0)
     <div class="row">
         <div class="col">
-            <x-adminlte-card style="width: 400px; height: 500px;" title="Prioject Total Authorized" theme="success"
+            <x-adminlte-card style="width: 300px; height: 450px;" title="Prioject Total Authorized" theme="success"
                 icon="fas fa-check">
                 <canvas id="authorizedChart"></canvas>
                 <h5>{{ round(($projectTotalAuthorized / $projectTotalWorksites) * 100, 2) }}% of the project is
@@ -11,7 +11,7 @@
             </x-adminlte-card>
         </div>
         <div class="col">
-            <x-adminlte-card style="width: 400px; height: 500px;" title="Project Total Refused" theme="danger"
+            <x-adminlte-card style="width: 300px; height: 450px;" title="Project Total Refused" theme="danger"
                 icon="fas fa-times">
                 <canvas id="refusedChart"></canvas>
                 <h5>{{ round(($projectTotalRefused / $projectTotalWorksites) * 100, 2) }}% of the project is Refused
@@ -20,7 +20,7 @@
             </x-adminlte-card>
         </div>
         <div class="col">
-            <x-adminlte-card style="width: 400px; height: 500px;" title="Project Overview" theme="info"
+            <x-adminlte-card style="width: 300px; height: 450px;" title="Project Overview" theme="info"
                 icon="fas fa-tasks">
                 <canvas id="overviewChart"></canvas>
                 <h5>{{ round((($projectTotalAuthorized + $projectTotalRefused) / $projectTotalWorksites) * 100, 2) }}%
