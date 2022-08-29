@@ -28,28 +28,28 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Config::set([
-        //     'adminlte.menu' => array_merge(
-        //         array_merge(
-        //             [[
-        //                 'text' => 'Dashboard',
-        //                 'icon' => 'fas fa-fw fa-bolt',
-        //                 'url' => "/"
-        //             ]],
-        //             collect(collect(Worksite::get('circuit_number'))
-        //                 ->unique()
-        //                 ->pluck('circuit_number')
-        //                 ->toArray())
-        //                 ->map(function ($circuit) {
-        //                     return [
-        //                         'text' => $circuit,
-        //                         'icon' => 'fas fa-fw fa-bolt',
-        //                         'url' => "circuits/$circuit"
-        //                     ];
-        //                 })->toArray()
-        //         ),
-        //         Config::get('adminlte.menu')
-        //     ),
-        // ]);
+        Config::set([
+            'adminlte.menu' => array_merge(
+                array_merge(
+                    [[
+                        'text' => 'Dashboard',
+                        'icon' => 'fas fa-fw fa-bolt',
+                        'url' => "/"
+                    ]],
+                    collect(collect(Worksite::get('circuit_number'))
+                        ->unique()
+                        ->pluck('circuit_number')
+                        ->toArray())
+                        ->map(function ($circuit) {
+                            return [
+                                'text' => $circuit,
+                                'icon' => 'fas fa-fw fa-bolt',
+                                'url' => "circuits/$circuit"
+                            ];
+                        })->toArray()
+                ),
+                Config::get('adminlte.menu')
+            ),
+        ]);
     }
 }
