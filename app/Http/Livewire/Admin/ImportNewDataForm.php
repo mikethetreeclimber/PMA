@@ -11,11 +11,17 @@ class ImportNewDataForm extends Component
     public $worksiteImport;
     public $success = false;
     public $failure = false;
+    public $loading = false;
+
+    public function updatingWorksiteImport()
+    {
+    }
 
     public function updatedWorksiteImport()
     {
-
         try {
+            $this->loading = true;
+
             Worksite::truncate();
 
             ImportHistory::create();
@@ -34,7 +40,9 @@ class ImportNewDataForm extends Component
                     "created_at_date" => isset($worksite['Create Date']) ? $worksite['Create Date'] : '',
                 ]);
             }
+
             $this->success = true;
+            $this->loading = false;
         } catch (\Throwable $th) {
             $this->failure = true;
         }

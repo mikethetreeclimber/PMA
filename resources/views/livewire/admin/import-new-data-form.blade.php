@@ -1,17 +1,19 @@
 <div>
     <div class="form-group">
-        @if($success)
-        <x-adminlte-alert theme="success" dismissable >Data successfully imported</x-adminlte-alert>
+       
+        @if ($success)
+            <x-adminlte-alert theme="success" dismissable>Data successfully imported
+               <h3> Refresh page or navigate to dashboard</h3>
+            </x-adminlte-alert>
         @endif
-        @if($failure)
-        <x-adminlte-alert theme="danger" dismissable >Something went wrong. Please refresh and try again.</x-adminlte-alert>
+        @if ($failure)
+            <x-adminlte-alert theme="danger" dismissable>Something went wrong. Please refresh and try again.
+            </x-adminlte-alert>
         @endif
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="file_upload" onchange="upload()">
             <label class="custom-file-label" for="file_upload">Choose file</label>
         </div>
-
-        <div id="json-result"></div>
     </div>
     @push('import-script')
         <script>

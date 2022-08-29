@@ -12,6 +12,8 @@ class DashboardCard extends Component
     public $projectTotalRefused;
     public $projectTotalWorksites;
 
+    protected $listeners = ['uploaded' => '$refresh'];
+
     public function mount()
     {
         $this->projectTotalWorksites = Worksite::count();

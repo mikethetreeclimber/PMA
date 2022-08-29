@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 return [
 
     /*
@@ -293,12 +295,12 @@ return [
                 [
                     'text' => 'Add User',
                     'icon' => 'fas fa-fw fa-plus',
-                    'url'  => '#',
+                    'url'  => 'admin/add-user',
                 ],
                 [
                     'text'    => 'Delete User',
                     'icon'    => 'fas fa-fw fa-trash',
-                    'url'     => '#',
+                    'url'     => 'admin/delete-user',
                 ],
             ],
         ],

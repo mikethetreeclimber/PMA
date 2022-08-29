@@ -13,6 +13,7 @@ use App\Http\Controllers\
     CircuitsController,
     HomeController
 };
+use App\Http\Livewire\Admin\AddUser;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request as HttpRequest;
 
@@ -34,6 +35,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/import-new-data-form', [AdminController::class, 'import'])->name('import');
 
 Route::get('/circuits/{circuit}', [CircuitsController::class, 'index'])->name('circuits');
+Route::view('admin/add-user', 'admin.add-user');
+Route::view('admin/delete-user', 'admin.delete-user');
+
 
 
 Auth::routes();
